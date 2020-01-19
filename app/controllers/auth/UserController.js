@@ -102,8 +102,11 @@ class User {
         if (userExists)
             return res.status(400).json({ fail: true, msg: 'there is already an account' });
         else {
+            // Hash the user password
+            let hashed_password = await bcrypt.hash(password, 10);
             await UserModel.create({
-                email, password,
+                email,
+                password: hashed_password,
                 method: 'local',
                 "name.firstname": firstname,
                 "name.lastname": lastname

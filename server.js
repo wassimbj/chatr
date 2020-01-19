@@ -40,9 +40,11 @@ app.use(userAuth);
 
 
 
-// ############################# TASKS #############################
+/* ############################# TASKS #############################
 
-// --> log user in with google and facebook, by set a session
+    --> Message between two users, that are active and NOT busy
+
+*/
 
 
 // ############## Start the server ###############

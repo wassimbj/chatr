@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-let UserSchema = new mongoose.Schema({
+let userSchema = new mongoose.Schema({
     method: {
         type: String,
         required: true,
@@ -20,10 +20,7 @@ let UserSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        lastname: {
-            type: String,
-            required: true
-        }
+        lastname: String
     },
     
     image: {
@@ -38,19 +35,5 @@ let UserSchema = new mongoose.Schema({
 
 });
 
-// userSchema.pre('save', function (next) {
-//     if(this.password)
-//     {
-//         bcrypt.hash(this.password, 10, (err, hashed) => {
-//             if (!err) {
-//                 this.password = hashed;
-//             } else {
-//                 console.log(err);
-//             }
-//         })
-//     }
 
-//     next();
-// });
-
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);

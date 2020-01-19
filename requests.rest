@@ -22,9 +22,18 @@ Content-Type: application/json
 
 {
     "email": "wassimbenjdida@gmail.com",
-    "password": "1000000",
-    "firstname": "batata",
-    "lastname": "heyyy"
+    "password": "123456",
+    "firstname": "wassim",
+    "lastname": "jdida"
+}
+
+### Login by email
+POST http://localhost:9000/login
+Content-Type: application/json
+
+{
+    "email": "wassimbenjdida@gmail.com",
+    "password": "123456"
 }
 
 
