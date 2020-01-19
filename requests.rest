@@ -1,0 +1,33 @@
+
+### Google auth
+POST http://localhost:9000/oauth/google
+Content-Type: application/json
+
+{
+    "access_token": ""
+}
+
+### Facebook auth
+POST http://localhost:9000/oauth/facebook
+Content-Type: application/json
+
+{
+    "access_token": ""
+}
+
+
+### Join by email
+POST http://localhost:9000/join
+Content-Type: application/json
+
+{
+    "email": "wassimbenjdida@gmail.com",
+    "password": "1000000",
+    "firstname": "batata",
+    "lastname": "heyyy"
+}
+
+
+
+### logout
+POST http://localhost:9000/logout
