@@ -44,18 +44,20 @@ class User {
     {
         // Set user session
         req.session.userid = req.user._id;
-        return res.status(200).json({fail: false, msg: 'logged in with success'});
+        req.session.save((err) => {
+            if (err)
+                console.log(err);
+            return res.status(200).json({fail: false, msg: 'logged in with success'});
+        });
     }
 
     // Login/Register user using Facebook
-    // Login/Register user using Google
     async facebookSign(accessToken, refreshToken, profile, done) {
 
         // Here we will do everything...
         // 1) get user by the email
         // 2) if there is an existing account, login him in 
         // 3) else create a new
-        console.log(profile)
         try {
 
             const existedUser = await UserModel.findOne({ email: profile.emails[0].value });
@@ -89,7 +91,11 @@ class User {
     facebookAuthCallback(req, res) {
         // Set user session
         req.session.userid = req.user._id;
-        return res.status(200).json({ fail: false, msg: 'logged in with success' });
+        req.session.save((err) => {
+            if(err)
+                console.log(err);
+            return res.status(200).json({ fail: false, msg: 'logged in with success' });
+        });
     }
 
 
@@ -110,9 +116,14 @@ class User {
                 method: 'local',
                 "name.firstname": firstname,
                 "name.lastname": lastname
-            }, (err, result) => {
+            }, (err, user) => {
                 if (!err) {
-                    return res.status(200).json({ fail: false, msg: 'Successfully registered' })
+                    req.session.userid = user.id;
+                    req.session.save((err) => {
+                        if (err)
+                            console.log(err);
+                        return res.status(200).json({ fail: false, msg: 'Successfully registered' })
+                    });
                 } else {
                     return res.status(500).json({ fail: true, msg: err })
                 }
@@ -123,7 +134,6 @@ class User {
     // Login user (By email, no OAuth)
     async emailLogin(req, res) {
         const {email, password} = req.body;
-
         // Get the user by email
         await UserModel.findOne({ email: email }, (err, user) => {
             // Check if there is user
@@ -132,7 +142,11 @@ class User {
                 bcrypt.compare(password, user.password, (err, same) => {
                     if (same) {
                         req.session.userid = user.id;
-                        return res.status(200).json({fail: false, msg: 'user logged in successfully'});
+                        req.session.save((err) => {
+                            if (err)
+                                console.log(err);
+                            return res.status(200).json({fail: false, msg: 'user logged in successfully'});
+                        });
                     } else {
                         return res.status(400).json({fail: true, msg: 'No user found, try logging in with facebook or google'})
                     }
@@ -148,7 +162,7 @@ class User {
     // Logout user
     logout(req, res) {
         req.session.destroy((err) => {
-            return res.status(200).json('logged out !');
+            return res.status(200).json({fail: false, msg: 'logged out !'});
         });
     }
 
@@ -156,17 +170,18 @@ class User {
     mustBeAuth(req, res, next){
         UserModel.findOne({_id: req.session.userid}, (err, user) => {
             if(err || !user)
-                return res.status(401).json('You must be logged in');
+                return res.status(401).json({fail: true, msg: 'You must be logged in'});
               next();
         });
     }
 
+    // gives a 400 if user is trying to access routes that he needs to be log out to access'em like the login and signup
     redirectIfAuth(req, res, next){
         if(req.session.userid)
-            return res.status(400).json('already logged in');    
+            return res.status(400).json({fail: true, msg: 'already logged in'});    
         
         next();
-    }
+    }    
 }
 
 module.exports = new User();

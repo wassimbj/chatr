@@ -5,9 +5,6 @@ const UserController = require('../../app/controllers/auth/UserController');
 
 require('../../config/passport');
 
-router.get('/', (req, res) => {
-    res.json('Hey')
-});
 
 // Login with email
 router.post('/login', 
@@ -38,6 +35,10 @@ router.post('/oauth/facebook',
 // Logout enpoint
 router.post('/logout', UserController.mustBeAuth ,UserController.logout);
 
+// get user status (authenticated or not)
+router.get('/isauth', UserController.mustBeAuth, (req, res) => {
+    return res.status(200).json({ msg: 'slm' });
+});
 
 
 module.exports = router;

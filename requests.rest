@@ -1,6 +1,6 @@
 
 ### Google auth
-POST http://localhost:9000/oauth/google
+POST http://localhost:8000/oauth/google
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Facebook auth
-POST http://localhost:9000/oauth/facebook
+POST http://localhost:8000/oauth/facebook
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 
 ### Join by email
-POST http://localhost:9000/join
+POST http://localhost:8000/join
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Login by email
-POST http://localhost:9000/login
+POST http://localhost:8000/login
 Content-Type: application/json
 
 {
@@ -37,6 +37,5 @@ Content-Type: application/json
 }
 
 
-
 ### logout
-POST http://localhost:9000/logout
+POST http://localhost:8000/logout
