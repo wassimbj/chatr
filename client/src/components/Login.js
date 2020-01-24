@@ -39,7 +39,7 @@ export default class Login extends Component {
     responseGoogle(res)
     {
         let access_token = res.accessToken;
-        fetch(`http://localhost:8000/oauth/google`, {
+        fetch(`${config.server_url}/oauth/google`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -52,7 +52,9 @@ export default class Login extends Component {
                 else
                     window.location.pathname = '/';
             })
-            .catch(err => console.log('GOOGLE_LOGIN_ERROR:',err))
+            .catch(err => {
+                this.setState({ isError: true, errorMsg: 'Something went wrong...' });
+            })
     }
 
     handleChange = name => e =>
@@ -146,7 +148,7 @@ export default class Login extends Component {
                                                 callback={this.responseFacebook}
                                             />
                                             <GoogleLogin
-                                                clientId="37916628313-lpqs8vr5ibu2rp6njh81ojs7lo17d2gb.apps.googleusercontent.com"
+                                                clientId="37916628313-474vprnvjo0upa92bsfutj6hkdo9gt70.apps.googleusercontent.com"
                                                 render={renderProps => (
                                                     <button className="p-3 bg-red-700 text-white rounded" onClick={renderProps.onClick} disabled={renderProps.disabled}>Google</button>
                                                 )}

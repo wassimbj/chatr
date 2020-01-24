@@ -6,17 +6,19 @@ import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 // Components
 import Login from './components/Login';
 import Home from './components/Home';
+import Inbox from './components/Inbox';
 
 class App extends React.Component {
 
   constructor()
   {
     super();
-    this.state = { isauth: false }
+    this.state = { isauth: null }
   }
 
   componentDidMount()
   {
+    // get useer status, (authenticated or not)
     fetch(`${config.server_url}/isauth`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
@@ -39,11 +41,10 @@ class App extends React.Component {
         <authContext.Provider value={{ isauth: this.state.isauth }}>
           <Router>
             <Switch>
-              <Route exact path='/'>
-                <Home />
-              </Route>
+              <Route exact path='/'><Home /></Route>
               <Route exact path='/login'><Login /></Route>
               <Route exact path='/join'> <h1>Join</h1> </Route>
+              <Route exact path='/inbox'> <Inbox /> </Route>
             </Switch>
           </Router>
         </authContext.Provider>

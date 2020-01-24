@@ -21,9 +21,9 @@ POST http://localhost:8000/join
 Content-Type: application/json
 
 {
-    "email": "wassimbenjdida@gmail.com",
+    "email": "aymen@gmail.com",
     "password": "123456",
-    "firstname": "wassim",
+    "firstname": "aymen",
     "lastname": "jdida"
 }
 
