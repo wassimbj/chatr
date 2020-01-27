@@ -1,56 +1,11 @@
 const UserModel = require('../../models/User');
 const bcrypt = require('bcrypt');
+const redisClient = require('redis').createClient();
 // const crypto = require('crypto');
 
+
 class User {
-
-    // Login/Register user using Google
-    async googleSign(accessToken, refreshToken, profile, done){
-
-        // Here we will do everything...
-        // 1) get user by the email
-        // 2) if there is an existing account, login him in 
-        // 3) else create a new
-        try {
-
-            const existedUser = await UserModel.findOne({email: profile.emails[0].value});
-            
-            if (existedUser){
-                // Log him in
-                
-                console.log('Heyy, we found the user: ', existedUser);
-                done(null, existedUser);
-            }else{
-                // Create an account
-                const newUser = await UserModel.create({
-                    method: 'google',
-                    email: profile.emails[0].value,
-                    "name.firstname": profile.name.givenName,
-                    "name.lastname": profile.name.familyName
-                });
-                console.log('Created a new user', newUser);
-
-                done(null, newUser);
-            }
-
-
-        } catch (err) {
-            console.log('GOOGLE_AUTH_ERROR: ', err);
-        }
-
-    }
-
-    googleAuthCallback(req, res)
-    {
-        // Set user session
-        req.session.userid = req.user._id;
-        req.session.save((err) => {
-            if (err)
-                console.log(err);
-            return res.status(200).json({fail: false, msg: 'logged in with success'});
-        });
-    }
-
+    
     // Login/Register user using Facebook
     async facebookSign(accessToken, refreshToken, profile, done) {
 
@@ -58,6 +13,7 @@ class User {
         // 1) get user by the email
         // 2) if there is an existing account, login him in 
         // 3) else create a new
+
         try {
 
             const existedUser = await UserModel.findOne({ email: profile.emails[0].value });
@@ -161,9 +117,11 @@ class User {
 
     // Logout user
     logout(req, res) {
-        req.session.destroy((err) => {
-            return res.status(200).json({fail: false, msg: 'logged out !'});
-        });
+        redisClient.hdel(`user:${req.session.userid}`, 'socketid', (err, reply) => {
+            req.session.destroy((err) => {
+                return res.status(200).json({fail: false, msg: 'logged out !'});
+            });
+        })
     }
 
     // a middleware to check if user is authenticated

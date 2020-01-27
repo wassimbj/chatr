@@ -19,13 +19,6 @@ router.post('/join',
 );
 
 // Login/Register with google
-router.post('/oauth/google',
-    UserController.redirectIfAuth, 
-    passport.authenticate('google-token', {session: false}),
-    UserController.googleAuthCallback
-);
-
-// Login/Register with google
 router.post('/oauth/facebook',
     UserController.redirectIfAuth, 
     passport.authenticate('facebook-token', {session: false}),
@@ -37,7 +30,7 @@ router.post('/logout', UserController.mustBeAuth ,UserController.logout);
 
 // get user status (authenticated or not)
 router.get('/isauth', UserController.mustBeAuth, (req, res) => {
-    return res.status(200).json({ msg: 'slm' });
+    return res.status(200).json({ msg: 'slm', id: req.session.userid });
 });
 
 

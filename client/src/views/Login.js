@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { authContext } from '../config/authContext';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import GoogleLogin from 'react-google-login';
 
 import config from '../config/config';
 
@@ -53,7 +52,7 @@ export default class Login extends Component {
                     window.location.pathname = '/';
             })
             .catch(err => {
-                this.setState({ isError: true, errorMsg: 'Something went wrong...' });
+                console.log('GOOGLE_OAUTH_ERROR: ', err)
             })
     }
 
@@ -102,7 +101,7 @@ export default class Login extends Component {
             <React.Fragment>
                 <authContext.Consumer>
                     {(value) => {
-                        if(value.isauth)
+                        if(value.isauth == true)
                             window.location.pathname = '/';
                         else
                             return(
@@ -142,18 +141,10 @@ export default class Login extends Component {
                                                     <button style={{ marginRight: 15 }}
                                                         className="bg-blue-800 text-white p-3 rounded" onClick={renderProps.onClick}>
                                                         Facebook
-                                            </button>
+                                                    </button>
                                                 )}
                                                 fields="name,email,picture"
                                                 callback={this.responseFacebook}
-                                            />
-                                            <GoogleLogin
-                                                clientId="37916628313-474vprnvjo0upa92bsfutj6hkdo9gt70.apps.googleusercontent.com"
-                                                render={renderProps => (
-                                                    <button className="p-3 bg-red-700 text-white rounded" onClick={renderProps.onClick} disabled={renderProps.disabled}>Google</button>
-                                                )}
-                                                onSuccess={this.responseGoogle}
-                                                onFailure={this.responseGoogle}
                                             />
                                         </div>
                                     </div>
