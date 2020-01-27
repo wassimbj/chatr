@@ -73,6 +73,9 @@ export default class Inbox extends Component {
             })
     }
 
+    componentWillUnmount() {
+        this.socket = null;
+    }
     
     handleChange = e =>
     {

@@ -15,7 +15,6 @@ class App extends React.Component {
   {
     super();
     this.state = { isauth: null, userid: null }
-
     this.socket = io.connect(`${config.server_url}`, { transports: ['websocket'] }, () => {
       console.log('Client connected to the server')
     });
@@ -44,10 +43,11 @@ class App extends React.Component {
       })
   }
 
+
   render(){
     return (
       <div className="App">
-        <authContext.Provider value={{ isauth: this.state.isauth, userid: this.state.userid }}>
+        <authContext.Provider value={this.state}>
             <Router>
               <Switch>
                 <Route exact path='/' component={Home} />

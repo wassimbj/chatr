@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import UserTochatWith from '../components/home/UserTochatWith';
 import { authContext } from '../config/authContext';
 import config from '../config/config';
-import io from 'socket.io-client';
 
 export default class Home extends Component {
 
@@ -45,9 +44,15 @@ export default class Home extends Component {
         })
         .then(res => res.json())
         .then(data => {
-            this.setState({ users: data.users, usersOnline: data.onlineUsers })
+            this.setState({ users: data.users, usersOnline: data.onlineUsers });
         })
         .catch(err => console.log('GET_USERS_ERROR: ', err))
+
+    }
+
+    componentWillUnmount()
+    {
+        this.socket = null;
     }
 
     render() {
