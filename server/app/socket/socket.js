@@ -1,4 +1,8 @@
-const redisClient = require('redis').createClient();
+let port = process.env.NODE_ENV == 'production' ? process.env.REDIS_PORT : 6379;
+let host = process.env.NODE_ENV == 'production' ? process.env.REDIS_HOST : '127.0.0.1';
+let password = process.env.NODE_ENV == 'production' ? process.env.REDIS_PASSWORD : '';
+
+const redisClient = require('redis').createClient(port, host, { auth_pass: password });
 // just to use redisClient.keys synchronously
 const { promisify } = require('util');
 const redisKeys = promisify(redisClient.keys).bind(redisClient);
@@ -68,10 +72,6 @@ function init(app)
     io.set('transports', ['websocket']);
 
     // Using Redis
-    let port = process.env.NODE_ENV == 'production' ? process.env.REDIS_PORT : 6379;
-    let host = process.env.NODE_ENV == 'production' ? process.env.REDIS_HOST : '127.0.0.1';
-    let password = process.env.NODE_ENV == 'production' ? process.env.REDIS_PASSWORD : '';
-    
     let pubClient = require('redis').createClient(port, host, { auth_pass: password });
     let subClient = require('redis').createClient(port, host, { auth_pass: password, return_buffers: true, });
     io.adapter(redisAdapter({ pubClient, subClient }));
