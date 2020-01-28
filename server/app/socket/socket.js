@@ -67,7 +67,14 @@ function init(app)
 
     io.set('transports', ['websocket']);
 
-    io.adapter(redisAdapter({ host: '127.0.0.1', port: 6379}));
+    // Using Redis
+    let port = process.env.NODE_ENV == 'production' ? process.env.REDIS_PORT : 6379;
+    let host = process.env.NODE_ENV == 'production' ? process.env.REDIS_HOST : '127.0.0.1';
+    let password = process.env.NODE_ENV == 'production' ? process.env.REDIS_PASSWORD : '';
+    
+    let pubClient = require('redis').createClient(port, host, { auth_pass: password });
+    let subClient = require('redis').createClient(port, host, { auth_pass: password, return_buffers: true, });
+    io.adapter(redisAdapter({ pubClient, subClient }));
 
     // call events
     socketEvents(io);

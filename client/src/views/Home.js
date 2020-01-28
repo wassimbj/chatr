@@ -37,6 +37,7 @@ export default class Home extends Component {
     componentDidMount()
     {
         // get users
+        this.setState({users: 'fetching'})
         fetch(`${config.server_url}`, {
             method: 'GET',
             headers: {'Content-type': 'application/json'},
@@ -62,17 +63,29 @@ export default class Home extends Component {
                     {(value) => {
                         return(
                             <div className='container mt-5 mx-auto'>
-                                <h1 className='font-bold p-5 mb-5'> Welcome to chatr </h1>
+                                <div className='text-center p-5 mb-5 bg-purple-600'>
+                                    <h1 className='text-gray-200 block text-2xl mb-3'>
+                                        Welcome to chatr,
+                                        {
+                                            value.isauth == true ?
+                                                <b> {value.name.firstname} {value.name.lastname} </b>
+                                                : null
+                                        }
+                                    </h1>
+                                    {
+                                        value.isauth == 'fetching'
+                                            ? // if
+                                            'Loading...'
+                                            : value.isauth ? // else if
+                                                <button onClick={this.handleLogout} className='p-2 rounded-full bg-red-600 font-semibold text-white'> Logout </button>
+                                                : // else
+                                                <div>
+                                                    <a href='/join' className='p-2 rounded-full bg-green-600 m-2 text-white font-semibold'> Join </a>
+                                                    <a href='/login' className='p-2 rounded-full bg-gray-700 m-2 text-white font-semibold'> Login </a>
+                                                </div>
+                                    }
+                                </div>
                                 
-                               {
-                                    value.isauth ?
-                                        <button onClick={this.handleLogout} className='p-5 m-5 rounded-full bg-red-600'> Logout </button>
-                                    : 
-                                    <div>
-                                        <a href='/join' className='p-5 m-5 rounded-full bg-blue-600'> Join </a>
-                                        <a href='/login' className='p-5 m-5 rounded-full bg-indigo-600'> Login </a>
-                                    </div>
-                               }
                                 <div id="container" class="w-4/5 mx-auto">
                                     <div className='my-10'>
                                         <h1 className='font-bold text-lg'> Start chatting now ! </h1>
@@ -80,17 +93,21 @@ export default class Home extends Component {
                                     </div>
                                     <div class="flex flex-col sm:flex-row">
                                     {
-                                        this.state.users.map((user, i) => {
-                                            return (
-                                                <UserTochatWith
-                                                    key={i}
-                                                    name={user.name.firstname +' '+ user.name.lastname}
-                                                    image={user.image}
-                                                    chatwith={user._id}
-                                                    userIsOnline={this.state.usersOnline.indexOf(`user:${user._id}`) !== -1}
-                                                />
-                                            );
-                                        })
+                                        this.state.users == 'fetching'
+                                        ?
+                                            'Loading...'
+                                        :
+                                            this.state.users.map((user, i) => {
+                                                return (
+                                                    <UserTochatWith
+                                                        key={i}
+                                                        name={user.name.firstname + ' ' + user.name.lastname}
+                                                        image={user.image}
+                                                        chatwith={user._id}
+                                                        userIsOnline={this.state.usersOnline.indexOf(`user:${user._id}`) !== -1}
+                                                    />
+                                                );
+                                            })
                                     }
                                     </div>
                                 </div>

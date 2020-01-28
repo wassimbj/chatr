@@ -21,9 +21,6 @@ export default class Inbox extends Component {
             chatwith_username: ''
         }
 
-        // this.socket = io.connect(`${config.server_url}`, { transports: ['websocket'] }, () => {
-        //     console.log('Client connected to the server')
-        // });
         this.socket = this.props.io;
     }
     
@@ -115,7 +112,10 @@ export default class Inbox extends Component {
             <React.Fragment>
                 <authContext.Consumer>
                     {(value) => {
-                        if (value.isauth === false)
+                        console.log(value)
+                        if(value.isauth == 'fetching')
+                            return 'Loading...';
+                        else if(value.isauth === false)
                             return window.location.pathname = '/login';
                         else
                             return (
@@ -130,9 +130,9 @@ export default class Inbox extends Component {
                                                 <div className="messages-headline">
                                                     <h4> 
                                                         {
-                                                        this.state.chatwith_username.firstname
-                                                        +' '+
-                                                        this.state.chatwith_username.lastname
+                                                            this.state.chatwith_username.firstname
+                                                            +' '+
+                                                            this.state.chatwith_username.lastname
                                                         }
                                                     </h4>
                                                     {/* <a href="#some_link" className="message-action"><i className="fas fa-trash"></i> Delete Conversation</a> */}

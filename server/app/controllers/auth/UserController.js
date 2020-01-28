@@ -114,6 +114,11 @@ class User {
 
     }
 
+    // Get authenticated user
+    async getUser(req, res){
+        let loggedInUser = await UserModel.findOne({_id: req.session.userid}, 'name');
+        return res.status(200).json({ msg: 'slm', id: req.session.userid, name: loggedInUser.name });
+    }
 
     // Logout user
     logout(req, res) {
@@ -139,7 +144,7 @@ class User {
             return res.status(400).json({fail: true, msg: 'already logged in'});    
         
         next();
-    }    
+    }  
 }
 
 module.exports = new User();

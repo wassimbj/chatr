@@ -29,9 +29,7 @@ router.post('/oauth/facebook',
 router.post('/logout', UserController.mustBeAuth ,UserController.logout);
 
 // get user status (authenticated or not)
-router.get('/isauth', UserController.mustBeAuth, (req, res) => {
-    return res.status(200).json({ msg: 'slm', id: req.session.userid });
-});
+router.get('/isauth', UserController.mustBeAuth, UserController.getUser);
 
 
 module.exports = router;

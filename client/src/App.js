@@ -2,19 +2,24 @@ import React from 'react';
 import {authContext} from './config/authContext';
 import config from './config/config';
 import { Switch, BrowserRouter as Router, Route} from 'react-router-dom';
+import io from 'socket.io-client';
 
 // Components
 import Login from './views/Login';
+import Register from './views/Register';
 import Home from './views/Home';
 import Inbox from './views/Inbox';
-import io from 'socket.io-client';
 
 class App extends React.Component {
 
   constructor()
   {
     super();
-    this.state = { isauth: null, userid: null }
+    this.state = {
+      isauth: null,
+      userid: null,
+      name: '',
+    }
     this.socket = io.connect(`${config.server_url}`, { transports: ['websocket'] }, () => {
       console.log('Client connected to the server')
     });
@@ -32,7 +37,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (data.msg == 'slm')
-          this.setState({ isauth: true, userid: data.id });
+          this.setState({ isauth: true, userid: data.id, name: data.name });
         else
           this.setState({ isauth: false });
       })
@@ -52,7 +57,7 @@ class App extends React.Component {
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />
-                <Route exact path='/join'> <h1>Join</h1> </Route>
+                <Route exact path='/join' component={Register} />
                 <Route exact path='/messages/:chatwith' component={(props) => <Inbox {...props} io={this.socket} />} />
               </Switch>
             </Router>

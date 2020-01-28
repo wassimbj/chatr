@@ -19,7 +19,8 @@ app.use(session);
 
 
 // ############### Connect to the DB ###############
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+let DB_URI = process.env.NODE_ENV == 'production' ? process.env.DB_URI : 'mongodb://localhost/chatr';
+mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.once('open', () => { console.log('DB is running...') });
 db.on('error', (err) => { console.log('DB_ERROR: ', err) })
