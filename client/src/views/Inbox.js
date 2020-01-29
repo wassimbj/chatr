@@ -146,6 +146,7 @@ export default class Inbox extends Component {
                                                             <h1> Send the first message... </h1>
                                                         :
                                                             this.state.messages_between_users.map(msg => {
+                                                                console.log(msg)
                                                                 return (
                                                                     msg.from._id == value.userid
                                                                     ?
@@ -155,7 +156,7 @@ export default class Inbox extends Component {
                                                                         />
                                                                     :
                                                                         <ToMsg
-                                                                            userAvatar={msg.to.image}
+                                                                            userAvatar={msg.from.image}
                                                                             msg={msg.msg}
                                                                         />
 

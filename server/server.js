@@ -47,15 +47,9 @@ ioServer.listen(port, () => {
 
 
 /* ############################# TASKS #############################
-    --> Send messages between two users with socket
-
-    1) when user connect, save (user:id socketid) in redis
     
-    2) First of all users choose who want to chat with, (display available users in the home-page)
-
-    3) user will be redirected to (/messages/[chat with user id])
-
-    4) user send a message we will join them both into one room wich is (chat_with_userid + auth_userid)
+    URGENT TASK:
+        --> fix: getting same image between two users when messaging
 
 */
 
