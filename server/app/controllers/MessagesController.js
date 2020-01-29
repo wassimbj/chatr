@@ -45,7 +45,7 @@ class Messages {
         let usersMessages = await MessageModel.find({
             $or: [
                 { from: req.session.userid, to },
-                { from: to, to: req.session.userid } 
+                { to, to: req.session.userid } 
             ]
         })
             .populate('from', ['image', '_id'])
