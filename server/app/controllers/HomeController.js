@@ -1,5 +1,5 @@
 const UserModel = require('../models/User');
-const redisClient = require('redis').createClient();
+const redisClient = require('../../config/redis');
 // just to use redisClient.keys synchronously
 const { promisify } = require('util');
 const redisKeys = promisify(redisClient.keys).bind(redisClient);

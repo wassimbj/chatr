@@ -51,7 +51,7 @@ export default class Register extends Component {
         } else {
 
             // everything is okay, send a login request
-            fetch('http://localhost:8000/join', {
+            fetch(`${config.server_url}/join`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

@@ -96,6 +96,8 @@ export default class Home extends Component {
                                         this.state.users == 'fetching'
                                         ?
                                             'Loading...'
+                                        : this.state.users.length == 0 ?
+                                            <p className='p-3 bg-gray-300 text-center'> No users registered yet... </p>
                                         :
                                             this.state.users.map((user, i) => {
                                                 return (

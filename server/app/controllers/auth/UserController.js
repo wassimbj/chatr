@@ -1,6 +1,6 @@
 const UserModel = require('../../models/User');
 const bcrypt = require('bcrypt');
-const redisClient = require('redis').createClient();
+const redisClient = require('../../../config/redis');
 // const crypto = require('crypto');
 
 

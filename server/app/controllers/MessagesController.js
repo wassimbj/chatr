@@ -1,6 +1,5 @@
 const MessageModel = require('../models/Message')
 const UserModel = require('../models/User')
-const redisClient = require('redis').createClient();
 
 class Messages {
 
