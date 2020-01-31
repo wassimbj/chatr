@@ -1,4 +1,4 @@
-[](https://chatr-demo.netlify.com/logo.png)
+![Chatr](https://chatr-demo.netlify.com/logo.png)
 ***Chatr - Private Real-time chat web application***
 
 # What is this ?
