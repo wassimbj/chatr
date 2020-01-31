@@ -1,5 +1,5 @@
-<div style="text-align:center">
-    <img src="https://chatr-demo.netlify.com/logo.png" width='200px' align='center'/>
+<div align='center' style="text-align:center">
+    <img src="https://chatr-demo.netlify.com/logo.png" width='200px' style='display: block'/>
     <b>Chatr - Private Real-time chat web application</b>
 </div>
 
