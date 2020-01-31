@@ -1,6 +1,6 @@
-<div align='center'>
-    <img src="https://chatr-demo.netlify.com/logo.png" width='200px' />
-    <b style="text-align:center">Chatr - Private Real-time chat web application</b>
+<div style="text-align:center">
+    <img src="https://chatr-demo.netlify.com/logo.png" width='200px' align='center'/>
+    <b>Chatr - Private Real-time chat web application</b>
 </div>
 
 # What is this ?
