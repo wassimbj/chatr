@@ -1,5 +1,7 @@
-![Chatr](https://chatr-demo.netlify.com/logo.png)
-***Chatr - Private Real-time chat web application***
+<div style="text-align:center">
+    <img src="https://chatr-demo.netlify.com/logo.png" width='200px' />
+    <b>Chatr - Private Real-time chat web application</b>
+</div>
 
 # What is this ?
 this is a real-time private chat application (means between two users)
