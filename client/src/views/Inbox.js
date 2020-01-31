@@ -119,70 +119,72 @@ export default class Inbox extends Component {
                             return window.location.pathname = '/login';
                         else
                             return (
-                                <div className='container mx-auto my-5'>
-                                    <div className="messages-container border-2">
+                                <div className='flex items-center justify-center h-full'>
+                                    <div className='container mx-auto my-5'>
+                                        <a href='/' className='inline-block p-3 rounded-full bg-indigo-600 text-white font-bold mb-10 hover:bg-indigo-700'> Go back </a>
+                                        <div className="messages-container border-2">
 
-                                        <div className="messages-container-inner">
+                                            <div className="messages-container-inner">
 
-                                            {/* <!-- Message Content --> */}
-                                            <div className="message-content">
+                                                {/* <!-- Message Content --> */}
+                                                <div className="message-content">
 
-                                                <div className="messages-headline">
-                                                    <h4> 
+                                                    <div className="messages-headline">
+                                                        <h4> 
+                                                            {
+                                                                this.state.chatwith_username.firstname
+                                                                +' '+
+                                                                this.state.chatwith_username.lastname
+                                                            }
+                                                        </h4>
+                                                        {/* <a href="#some_link" className="message-action"><i className="fas fa-trash"></i> Delete Conversation</a> */}
+                                                    </div>
+
+                                                    {/* <!-- Message Content Inner --> */}
+                                                    <div className="message-content-inner">
                                                         {
-                                                            this.state.chatwith_username.firstname
-                                                            +' '+
-                                                            this.state.chatwith_username.lastname
+                                                            this.state.messages_between_users.length == 0
+                                                            ?
+                                                                <div className='text-center block'>
+                                                                    <img src='https://kit8.net/images/thumbnails/580/435/detailed/2/Chat_connetions-1@2x.png' alt='IMG' className='mx-auto' width='300px' />
+                                                                    <p className='font-bold mt-3 text-lg'>Start the conversation, by sending the first message...</p>
+                                                                </div>
+                                                            :
+                                                                this.state.messages_between_users.map(msg => {
+                                                                    console.log(msg)
+                                                                    return (
+                                                                        msg.from._id == value.userid
+                                                                        ?
+                                                                            <FromMsg
+                                                                                userAvatar={msg.from.image}
+                                                                                msg={msg.msg}
+                                                                            />
+                                                                        :
+                                                                            <ToMsg
+                                                                                userAvatar={msg.from.image}
+                                                                                msg={msg.msg}
+                                                                            />
+
+                                                                    )
+                                                                })
                                                         }
-                                                    </h4>
-                                                    {/* <a href="#some_link" className="message-action"><i className="fas fa-trash"></i> Delete Conversation</a> */}
-                                                </div>
+                                                        
+                                                    </div>
+                                                    {/* <!-- Message Content Inner / End --> */}
 
-                                                {/* <!-- Message Content Inner --> */}
-                                                <div className="message-content-inner">
-                                                    {
-                                                        this.state.messages_between_users.length == 0
-                                                        ?
-                                                            <h1> Send the first message... </h1>
-                                                        :
-                                                            this.state.messages_between_users.map(msg => {
-                                                                console.log(msg)
-                                                                return (
-                                                                    msg.from._id == value.userid
-                                                                    ?
-                                                                        <FromMsg
-                                                                            userAvatar={msg.from.image}
-                                                                            msg={msg.msg}
-                                                                        />
-                                                                    :
-                                                                        <ToMsg
-                                                                            userAvatar={msg.from.image}
-                                                                            msg={msg.msg}
-                                                                        />
+                                                    {/* <!-- Reply Area --> */}
+                                                    <div className="message-reply">
+                                                        <textarea id='message_field' cols="1" rows="1" placeholder="Your Message..."
+                                                        onChange={this.handleChange}></textarea>
 
-                                                                )
-                                                            })
-                                                    }
-                                                    
-                                                    {/* <TypingMsg
-                                                        userAvatar='/images/user-02.jpg'
-                                                    /> */}
+                                                        <button className="text-white bg-indigo-600 hover:bg-indigo-700 font-semibold p-3 shadow"
+                                                        onClick={this.sendMessage}> Send </button>
+                                                    </div>
 
                                                 </div>
-                                                {/* <!-- Message Content Inner / End --> */}
-
-                                                {/* <!-- Reply Area --> */}
-                                                <div className="message-reply">
-                                                    <textarea id='message_field' cols="1" rows="1" placeholder="Your Message..."
-                                                    onChange={this.handleChange}></textarea>
-
-                                                    <button className="text-white bg-indigo-700 font-semibold p-3 shadow"
-                                                    onClick={this.sendMessage}> Send </button>
-                                                </div>
+                                                {/* <!-- Message Content --> */}
 
                                             </div>
-                                            {/* <!-- Message Content --> */}
-
                                         </div>
                                     </div>
                                 </div>

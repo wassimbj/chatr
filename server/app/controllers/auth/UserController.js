@@ -20,8 +20,7 @@ class User {
 
             if (existedUser) {
                 // Log him in
-
-                console.log('User already exists');
+                // console.log('User already exists');
                 done(null, existedUser);
             } else {
                 // Create an account
@@ -32,7 +31,7 @@ class User {
                     "name.firstname": profile.name.givenName,
                     "name.lastname": profile.name.familyName
                 });
-                console.log('Created a new user');
+                // console.log('Created a new user');
 
                 done(null, newUser);
             }
@@ -104,11 +103,11 @@ class User {
                             return res.status(200).json({fail: false, msg: 'user logged in successfully'});
                         });
                     } else {
-                        return res.status(400).json({fail: true, msg: 'No user found, try logging in with facebook or google'})
+                        return res.status(400).json({fail: true, msg: 'This email is associated with a facebook account, try to login using facebook.'})
                     }
                 });
             } else {
-                return res.status(400).json({fail: true, msg: 'Oops ! no user was found'})
+                return res.status(400).json({fail: true, msg: 'No user found'})
             }
         });
 

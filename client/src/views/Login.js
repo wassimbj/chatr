@@ -88,7 +88,10 @@ export default class Login extends Component {
                             return(
                                 <div className='container mx-auto'>
                                     <div className="bg-white shadow-md border-2 border-gray-300 rounded mx-auto w-full lg:w-1/2 md:w-2/3 px-8 pt-6 pb-8 mb-4 flex flex-col mt-20">
-                                        <h1 className='text-center font-bold text-2xl mb-10 p-3'> Login to Chatr </h1>
+                                        <div className='mb-5 p-3'>
+                                            <img src='/logo.png' width='100px' className='mx-auto' />
+                                            <h1 className='text-center font-bold text-2xl'> Login to Chatr </h1>
+                                        </div>
 
                                         {
                                             this.state.isError ?
@@ -101,26 +104,27 @@ export default class Login extends Component {
                                         }
 
                                         <div className="mb-4">
-                                            <label className="block text-grey-darker text-sm font-bold mb-2">email</label>
+                                            <label className="block text-gray-600 text-sm font-bold mb-2">email</label>
                                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                                                 onChange={this.handleChange('email')} type="text" placeholder="email" />
                                         </div>
                                         <div className="mb-6">
-                                            <label className="block text-grey-darker text-sm font-bold mb-2">Password</label>
+                                            <label className="block text-gray-600 text-sm font-bold mb-2">Password</label>
                                             <input className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" onChange={this.handleChange('password')} type="password" placeholder="******************" />
                                         </div>
                                         <div className="flex mt-5">
                                             <button onClick={this.handleLogin} className="bg-indigo-500 rounded mx-auto shadow-md p-3 px-10 text-white">
                                                 Login in
-                                    </button>
+                                            </button>
                                         </div>
+                                        <a href='/join' className='block text-sm text-center text-blue-500 mt-3'> You dont have an account ? Create one </a>
                                         <div className='mx-auto mt-3'>
                                             <span className='p-3 block text-center'> or </span>
                                             <FacebookLogin
                                                 appId="1545113332307583"
                                                 render={renderProps => (
                                                     <button style={{ marginRight: 15 }}
-                                                        className="bg-blue-800 text-white p-3 rounded" onClick={renderProps.onClick}>
+                                                        className="bg-blue-800 text-white py-2 px-3 rounded" onClick={renderProps.onClick}>
                                                         Facebook
                                                     </button>
                                                 )}

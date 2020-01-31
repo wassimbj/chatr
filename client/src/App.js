@@ -42,9 +42,8 @@ class App extends React.Component {
           this.setState({ isauth: false });
       })
       .catch(err => {
-        // window.location.reload();
-        console.log('APP_ERROR: ', err)
-        alert('Something crashed... please refresh')
+        // console.log('USER_ISAUTH_ERROR: ', err)
+        alert('Something crashed, please refresh your browser')
       })
   }
 

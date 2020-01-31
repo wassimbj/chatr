@@ -2,13 +2,14 @@ import React from 'react'
 
 export default function UserTochatWith({image, name, chatwith, userIsOnline}) {
     return (
-        <div class="sm:w-1/4 p-2">
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
             <div class="bg-white px-6 py-8 rounded-lg border-2 border-gray-300 shadow-lg hover:shadow-xl text-center">
                 <div class="mb-3">
                     <img
                         class="w-auto mx-auto rounded-full"
                         src={`${image}`}
                         alt=""
+                        style={{maxWidth: '130px'}}
                     />
                 </div>
 

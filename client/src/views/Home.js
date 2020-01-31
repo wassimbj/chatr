@@ -62,8 +62,8 @@ export default class Home extends Component {
                 <authContext.Consumer>
                     {(value) => {
                         return(
-                            <div className='container mt-5 mx-auto'>
-                                <div className='text-center p-5 mb-5 bg-purple-600'>
+                            <div>
+                                <div className='text-center p-5 mb-5 bg-indigo-600'>
                                     <h1 className='text-gray-200 block text-2xl mb-3'>
                                         Welcome to chatr,
                                         {
@@ -85,32 +85,33 @@ export default class Home extends Component {
                                                 </div>
                                     }
                                 </div>
-                                
-                                <div id="container" class="w-4/5 mx-auto">
-                                    <div className='my-10'>
-                                        <h1 className='font-bold text-lg'> Start chatting now ! </h1>
-                                        <p className='p-2 text-gray-700'> Choose a user to start chatting with </p>
-                                    </div>
-                                    <div class="flex flex-col sm:flex-row">
-                                    {
-                                        this.state.users == 'fetching'
-                                        ?
-                                            'Loading...'
-                                        : this.state.users.length == 0 ?
-                                            <p className='p-3 bg-gray-300 text-center'> No users registered yet... </p>
-                                        :
-                                            this.state.users.map((user, i) => {
-                                                return (
-                                                    <UserTochatWith
-                                                        key={i}
-                                                        name={user.name.firstname + ' ' + user.name.lastname}
-                                                        image={user.image}
-                                                        chatwith={user._id}
-                                                        userIsOnline={this.state.usersOnline.indexOf(`user:${user._id}`) !== -1}
-                                                    />
-                                                );
-                                            })
-                                    }
+                                <div className='container mt-5 mx-auto'>
+                                    <div id="container" class="w-4/5 mx-auto">
+                                        <div className='my-10'>
+                                            <h1 className='font-bold text-lg'> Start chatting now ! </h1>
+                                            <p className='p-2 text-gray-700'> Choose a user to start chatting with </p>
+                                        </div>
+                                        <div class="flex flex-wrap">
+                                        {
+                                            this.state.users == 'fetching'
+                                            ?
+                                                'Loading...'
+                                            : this.state.users.length == 0 ?
+                                                <p className='p-3 bg-gray-300 text-center'> No users registered yet... </p>
+                                            :
+                                                this.state.users.map((user, i) => {
+                                                    return (
+                                                        <UserTochatWith
+                                                            key={i}
+                                                            name={user.name.firstname + ' ' + user.name.lastname}
+                                                            image={user.image}
+                                                            chatwith={user._id}
+                                                            userIsOnline={this.state.usersOnline.indexOf(`user:${user._id}`) !== -1}
+                                                        />
+                                                    );
+                                                })
+                                        }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
