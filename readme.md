@@ -1,7 +1,7 @@
-<p align='center' style="text-align:center">
+<p align='center'>
     <img src="https://chatr-demo.netlify.com/logo.png" width='200px' align='center' style='display:block'/>
 </p>
-<b>Chatr - Private Real-time chat web application</b>
+<b align='center'>Chatr - Private Real-time chat web application</b>
 
 # What is this ?
 this is a real-time private chat application (means between two users)
