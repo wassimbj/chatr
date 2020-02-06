@@ -1,7 +1,5 @@
-// https://chatr-demo.herokuapp.com
-
 const config = {
-    server_url: 'https://chatr-demo.herokuapp.com' // change it to your localhost url if you are in dev
+    server_url: 'ADD_YOURS' // change it to your localhost url if you are in dev
 }
 
 module.exports = config;

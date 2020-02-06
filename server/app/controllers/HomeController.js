@@ -9,7 +9,7 @@ class Home{
     async index(req, res)
     {
         // Get all the users
-        let users = await UserModel.find({_id: {$ne: req.session.userid}}, {password: false});
+        let users = await UserModel.find({_id: {$ne: req.session.userid}}, {password: false, email: false});
         // get online users, wich are stored in redis
         // online here means user is logged in and his socket is connected
         let onlineUsers = await redisKeys('*user*');

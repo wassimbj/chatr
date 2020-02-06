@@ -103,7 +103,7 @@ class User {
                             return res.status(200).json({fail: false, msg: 'user logged in successfully'});
                         });
                     } else {
-                        return res.status(400).json({fail: true, msg: 'This email is associated with a facebook account, try to login using facebook.'})
+                        return res.status(400).json({fail: true, msg: 'no user found'})
                     }
                 });
             } else {
