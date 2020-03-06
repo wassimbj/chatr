@@ -48,8 +48,7 @@ ioServer.listen(port, () => {
 
 /* ############################# TASKS #############################
     
-    URGENT TASK:
-        --> fix: getting same image between two users when messaging
+
 
 */
 
