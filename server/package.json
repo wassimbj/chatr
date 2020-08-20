@@ -10,7 +10,7 @@
   "author": "wassimbj",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "connect-redis": "^4.0.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
