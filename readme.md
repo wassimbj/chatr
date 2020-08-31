@@ -10,6 +10,11 @@ built with Nodejs, Expressjs, Redis, MongoDB and Reactjs for the client, the API
 ## Demo
 Check [Demo](https://chatr-demo.netlify.com)
 
+## Note
+i didnt have time to make the demo work again, so if you want to test it in your local machine, just clone the repo  
+cd into the server and run ```npm start```  
+and the same to the client, and you shall see it working, **dont forget to put your redis credentials**
+
 # Features
 - Express.js Server + React.js Client
 - Session authentication with the help of **express-session** package
