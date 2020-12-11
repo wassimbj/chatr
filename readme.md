@@ -4,7 +4,7 @@
 <p align='center' style='text-align:center'>Chatr - Private Real-time chat web application</p>
 
 # What is this ?
-this is a real-time private chat application (between two users).
+this is a real-time private chat application (peer-to-peer).
 built with Nodejs, Expressjs, Redis, MongoDB and Reactjs for the client, the API is deployed on heroku and the client is on netlify
 
 ## Demo
